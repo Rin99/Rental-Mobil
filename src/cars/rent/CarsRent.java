@@ -10,13 +10,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import koneksi.koneksi;
 
 /**
  *
  * @author SHELBI
  */
 public class CarsRent {
-
+    
+    
+        
     static int[] id_Staff = new int[10];
     static String[] nama_Staff = new String[10];
     static String[] jk_Staff = new String[10];
