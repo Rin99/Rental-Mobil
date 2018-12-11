@@ -10,162 +10,138 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author Fikri
- */
 public class mobil_form extends javax.swing.JFrame {
 
-    /**
-     * Creates new form mobil_form
-     */
     public mobil_form() {
         initComponents();
-    tampiltabel();
+        tampiltabel();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-Dimension frameSize = getSize();
-setLocation(
-(screenSize.width - frameSize.width) / 2,
-(screenSize.height - frameSize.height) / 2);
+        Dimension frameSize = getSize();
+        setLocation(
+                (screenSize.width - frameSize.width) / 2,
+                (screenSize.height - frameSize.height) / 2);
     }
-String id_mobil;
-void tampiltabel()
-{
-try
-{
-Koneksi objkoneksi = new Koneksi();
-Connection con = objkoneksi.bukakoneksi();
-Statement st = con.createStatement();
-String sql = "select *from data_mobil";
-ResultSet set = st.executeQuery(sql);
-ResultSetTableModel model = new ResultSetTableModel (set);
-tabel_mobil.setModel (model);
-}
-catch (SQLException e)
-{
-System.out.println("gagal query ini"+e);
-}
-}
- private void clear() {
-        
+    String id_mobil;
+
+    void tampiltabel() {
+        try {
+            Koneksi objkoneksi = new Koneksi();
+            Connection con = objkoneksi.bukakoneksi();
+            Statement st = con.createStatement();
+            String sql = "select *from data_mobil";
+            ResultSet set = st.executeQuery(sql);
+            ResultSetTableModel model = new ResultSetTableModel(set);
+            tabel_mobil.setModel(model);
+        } catch (SQLException e) {
+            System.out.println("gagal query ini" + e);
+        }
+    }
+
+    private void clear() {
+
         merk_mobil.setText("");
         tipe_mobil.setSelectedItem("--Pilih Tipe--");
         tahun_mobil.setSelectedItem("--Pilih Tahun--");
         nopol_mobil.setText("");
         sewa_mobil.setText("");
         status_mobil.setSelectedItem("--Pilih Status--");
-       
+
     }
 
- void tambah() {
-         if(merk_mobil.getText().isEmpty() || tipe_mobil.getSelectedItem().equals("--Pilih Tipe--") || tahun_mobil.getSelectedItem().equals("--Pilih Tahun--") || nopol_mobil.getText().isEmpty() || sewa_mobil.getText().isEmpty() || status_mobil.getSelectedItem().equals("--Pilih Status--"))
-        { JOptionPane.showMessageDialog(this, "Data yang dimasukkan tidak lengkap!");}
-        else
-        {
+    void tambah() {
+        if (merk_mobil.getText().isEmpty() || tipe_mobil.getSelectedItem().equals("--Pilih Tipe--") || tahun_mobil.getSelectedItem().equals("--Pilih Tahun--") || nopol_mobil.getText().isEmpty() || sewa_mobil.getText().isEmpty() || status_mobil.getSelectedItem().equals("--Pilih Status--")) {
+            JOptionPane.showMessageDialog(this, "Data yang dimasukkan tidak lengkap!");
+        } else {
             try {
                 Koneksi objkoneksi = new Koneksi();
-                Connection con =objkoneksi.bukakoneksi();
+                Connection con = objkoneksi.bukakoneksi();
                 Statement st = con.createStatement();
-                String sql = "insert into data_mobil (nopol_mobil, merk_mobil, tipe_mobil, tahun_mobil, sewa_mobil,status_mobil)" + "values ('"+nopol_mobil.getText()+"','" +merk_mobil.getText()+"','"+tipe_mobil.getSelectedItem()+"','"+tahun_mobil.getSelectedItem() +"','"+sewa_mobil.getText()+ "','"+status_mobil.getSelectedItem()+"')";
-                int row =st.executeUpdate(sql);
-                if (row==1)
-                {
-                    JOptionPane.showMessageDialog(null,"Data mobil sudah ditambahkan ke database","informasi",JOptionPane.INFORMATION_MESSAGE);
+                String sql = "insert into data_mobil (nopol_mobil, merk_mobil, tipe_mobil, tahun_mobil, sewa_mobil,status_mobil)" + "values ('" + nopol_mobil.getText() + "','" + merk_mobil.getText() + "','" + tipe_mobil.getSelectedItem() + "','" + tahun_mobil.getSelectedItem() + "','" + sewa_mobil.getText() + "','" + status_mobil.getSelectedItem() + "')";
+                int row = st.executeUpdate(sql);
+                if (row == 1) {
+                    JOptionPane.showMessageDialog(null, "Data mobil sudah ditambahkan ke database", "informasi", JOptionPane.INFORMATION_MESSAGE);
                     con.close();
                 }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Data mobil tidak ditambahkan ke database" + e, "informasi", JOptionPane.INFORMATION_MESSAGE);
             }
-            catch (SQLException e)
-            {
-                JOptionPane.showMessageDialog(null,"Data mobil tidak ditambahkan ke database"+e,"informasi",JOptionPane.INFORMATION_MESSAGE);
-            }}
-            clear();
-            tampiltabel();
- 
- }
- void ubah() {
-  try
-        {
+        }
+        clear();
+        tampiltabel();
+
+    }
+
+    void ubah() {
+        try {
             Koneksi objkoneksi = new Koneksi();
-            Connection con =objkoneksi.bukakoneksi();
+            Connection con = objkoneksi.bukakoneksi();
             Statement st = con.createStatement();
-            String sql = "update data_mobil set merk_mobil = '"+merk_mobil.getText()+"',"
-            + "tipe_mobil = '"+tipe_mobil.getSelectedItem()+"',"
-            + "tahun_mobil = '"+tahun_mobil.getSelectedItem()+"',"
-            + "sewa_mobil = '"+sewa_mobil.getText()+"',"
-            + "status_mobil = '"+status_mobil.getSelectedItem()+"'"
-            + "where nopol_mobil ='" +nopol_mobil.getText()+"'";
-            int row =st.executeUpdate(sql);
-            if (row==1)
-            {
-                JOptionPane.showMessageDialog(null,"Data sudah diupdate","informasi",JOptionPane.INFORMATION_MESSAGE);
+            String sql = "update data_mobil set merk_mobil = '" + merk_mobil.getText() + "',"
+                    + "tipe_mobil = '" + tipe_mobil.getSelectedItem() + "',"
+                    + "tahun_mobil = '" + tahun_mobil.getSelectedItem() + "',"
+                    + "sewa_mobil = '" + sewa_mobil.getText() + "',"
+                    + "status_mobil = '" + status_mobil.getSelectedItem() + "'"
+                    + "where nopol_mobil ='" + nopol_mobil.getText() + "'";
+            int row = st.executeUpdate(sql);
+            if (row == 1) {
+                JOptionPane.showMessageDialog(null, "Data sudah diupdate", "informasi", JOptionPane.INFORMATION_MESSAGE);
                 con.close();
             }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "data tidak diubah"
+                    + e, "informasi", JOptionPane.INFORMATION_MESSAGE);
         }
-        catch (SQLException e)
-        {
-            JOptionPane.showMessageDialog(null,"data tidak diubah"+
-                e,"informasi",JOptionPane.INFORMATION_MESSAGE);
-        }
-        clear(); tampiltabel();
- }
- void cari() {
- if(txt_search_AddItem.getText().isEmpty()){
+        clear();
+        tampiltabel();
+    }
+
+    void cari() {
+        if (txt_search_AddItem.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Isikan data pencarian");
-        }else{
+        } else {
             try {
 
                 Koneksi objkoneksi = new Koneksi();
                 Connection con = objkoneksi.bukakoneksi();
                 Statement st = con.createStatement();
-                String sql = "select *from data_mobil where merk_mobil LIKE '%"+txt_search_AddItem.getText()+"%' OR tipe_mobil LIKE '%"+txt_search_AddItem.getText()+"%' OR nopol_mobil LIKE '%"+txt_search_AddItem.getText()+"%' OR sewa_mobil LIKE '%"+txt_search_AddItem.getText()+"%' OR status_mobil LIKE '%"+txt_search_AddItem.getText()+"%' OR tahun_mobil LIKE '%"+txt_search_AddItem.getText()+"%'";
+                String sql = "select *from data_mobil where merk_mobil LIKE '%" + txt_search_AddItem.getText() + "%' OR tipe_mobil LIKE '%" + txt_search_AddItem.getText() + "%' OR nopol_mobil LIKE '%" + txt_search_AddItem.getText() + "%' OR sewa_mobil LIKE '%" + txt_search_AddItem.getText() + "%' OR status_mobil LIKE '%" + txt_search_AddItem.getText() + "%' OR tahun_mobil LIKE '%" + txt_search_AddItem.getText() + "%'";
                 ResultSet set = st.executeQuery(sql);
-                ResultSetTableModel model = new ResultSetTableModel (set);
-                tabel_mobil.setModel (model);
+                ResultSetTableModel model = new ResultSetTableModel(set);
+                tabel_mobil.setModel(model);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Pencarian Error");
             }
         }
- }
- void hapus() {
- try
-        {
+    }
+
+    void hapus() {
+        try {
             Koneksi objkoneksi = new Koneksi();
             Connection con = objkoneksi.bukakoneksi();
             Statement st = con.createStatement();
-            String id=String.valueOf(tabel_mobil.getValueAt(tabel_mobil.getSelectedRow(),0));
-            String sql = "delete from data_mobil where nopol_mobil= '"+id+"'";
-            int confirm =JOptionPane.showConfirmDialog(this,
-                "Yakin untuk menghapus data ini?",
-                "Konfirmasi Hapus ",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
-            if (confirm==JOptionPane.YES_OPTION) {
+            String id = String.valueOf(tabel_mobil.getValueAt(tabel_mobil.getSelectedRow(), 0));
+            String sql = "delete from data_mobil where nopol_mobil= '" + id + "'";
+            int confirm = JOptionPane.showConfirmDialog(this,
+                    "Yakin untuk menghapus data ini?",
+                    "Konfirmasi Hapus ",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (confirm == JOptionPane.YES_OPTION) {
                 int row = st.executeUpdate(sql);
-                if (row ==1)
-                {
-                    JOptionPane.showMessageDialog(null,"Data sudah dihapus dari database","informasi",JOptionPane.INFORMATION_MESSAGE);
+                if (row == 1) {
+                    JOptionPane.showMessageDialog(null, "Data sudah dihapus dari database", "informasi", JOptionPane.INFORMATION_MESSAGE);
                     con.close();
-                }}}
-                catch (SQLException e)
-                {
-                    JOptionPane.showMessageDialog(null, "data tidak dihapus"+e,"informasi",JOptionPane.INFORMATION_MESSAGE);
-                } catch (HeadlessException e) {
-                    JOptionPane.showMessageDialog(null, "data tidak dihapus"+e,"informasi",JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "data tidak dihapus" + e, "informasi", JOptionPane.INFORMATION_MESSAGE);
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(null, "data tidak dihapus" + e, "informasi", JOptionPane.INFORMATION_MESSAGE);
         }
-                tampiltabel();
-                clear();
- }
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+        tampiltabel();
+        clear();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -490,15 +466,14 @@ System.out.println("gagal query ini"+e);
     }//GEN-LAST:event_nopol_mobilActionPerformed
 
     private void tabel_mobilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabel_mobilMouseClicked
-        int baris=tabel_mobil.getSelectedRow();
-        if (evt.getClickCount()>0)
-        {
+        int baris = tabel_mobil.getSelectedRow();
+        if (evt.getClickCount() > 0) {
             try {
                 Koneksi objkoneksi = new Koneksi();
-                Connection con =objkoneksi.bukakoneksi();
+                Connection con = objkoneksi.bukakoneksi();
                 Statement st = con.createStatement();
-                String sql = "select *from data_mobil where nopol_mobil='"+tabel_mobil.getValueAt(baris, 0).toString()+"'";
-                ResultSet rs =st.executeQuery(sql);
+                String sql = "select *from data_mobil where nopol_mobil='" + tabel_mobil.getValueAt(baris, 0).toString() + "'";
+                ResultSet rs = st.executeQuery(sql);
                 rs.last();
                 merk_mobil.setText(rs.getString("merk_mobil"));
                 tipe_mobil.setSelectedItem(rs.getString("tipe_mobil"));
@@ -506,9 +481,9 @@ System.out.println("gagal query ini"+e);
                 nopol_mobil.setText(rs.getString("nopol_mobil"));
                 sewa_mobil.setText(rs.getString("sewa_mobil"));
                 status_mobil.setSelectedItem(rs.getString("status_mobil"));
+            } catch (SQLException e) {
+                System.out.println("gagal mengambil data dari tabel" + e);
             }
-            catch (SQLException e)
-            {System.out.println("gagal mengambil data dari tabel"+e);}
         }
     }//GEN-LAST:event_tabel_mobilMouseClicked
 
@@ -517,11 +492,11 @@ System.out.println("gagal query ini"+e);
     }//GEN-LAST:event_btn_Search_AddItemActionPerformed
 
     private void btn_Edit_addItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Edit_addItemActionPerformed
-       ubah();
+        ubah();
     }//GEN-LAST:event_btn_Edit_addItemActionPerformed
 
     private void btn_create_addItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_create_addItemActionPerformed
-tambah();
+        tambah();
     }//GEN-LAST:event_btn_create_addItemActionPerformed
 
     private void btn_Delete__addItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Delete__addItemActionPerformed
@@ -550,34 +525,8 @@ tambah();
         // TODO add your handling code here:
     }//GEN-LAST:event_tipe_mobilActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(mobil_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(mobil_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(mobil_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(mobil_form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new mobil_form().setVisible(true);
