@@ -136,7 +136,7 @@ public class pengembalian_form extends javax.swing.JFrame {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost/rental_mobil", "root", "");
             st = con.createStatement();
-            String sql = "select * from data_pelanggan where NoTransaksi = '" + kode_trans.getSelectedItem() + "'";
+            String sql = "select * from data_pelanggan where kode_trans = '" + kode_trans.getSelectedItem() + "'";
             rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -170,18 +170,18 @@ public class pengembalian_form extends javax.swing.JFrame {
             rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                nopol_mobil.setText(rs.getString("nopol_mobil"));
-                lbl_total.setText(rs.getString("total_biaya"));
-                tanggal_pesan.setText(rs.getString("tgl_pesan"));
-                tanggal_pinjam.setText(rs.getString("tgl_pinjam"));
-                jam_pinjam.setText(rs.getString("jam_pinjam"));
-                rencanatgl_kembali.setText(rs.getString("tgl_kembali_rencana"));
-                a = rs.getDate("tgl_kembali_rencana");
-                rencanajam_kembali.setText(rs.getString("jam_kembali_rencana"));
-                kondisi_pinjam.setText(rs.getString("kondisi_pinjam"));
-                kilometer_pinjam.setText(rs.getString("kilometer_pinjam"));
-                bbm_pinjam.setText(rs.getString("bbm_pinjam"));
-                id_sopir.setText(rs.getString("id_sopir"));
+                nopol_mobil.setText(rs.getString("NoPlat"));
+                lbl_total.setText(rs.getString("BiayaPinjam"));
+                tanggal_pesan.setText(rs.getString("TglPesan"));
+                tanggal_pinjam.setText(rs.getString("TglPinjam"));
+                jam_pinjam.setText(rs.getString("JamPinjam"));
+                rencanatgl_kembali.setText(rs.getString("TglKembaliRencana"));
+                a = rs.getDate("TglKembaliRencana");
+                rencanajam_kembali.setText(rs.getString("JamKembaliRencana"));
+                kondisi_pinjam.setText(rs.getString("KondisiMobilPinjam"));
+                kilometer_pinjam.setText(rs.getString("KilometerPinjam"));
+                bbm_pinjam.setText(rs.getString("BBMPinjam"));
+                id_sopir.setText(rs.getString("IDSopir"));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -198,22 +198,22 @@ public class pengembalian_form extends javax.swing.JFrame {
     }
 
     void add() {
-        if (realtgl_kembali.getDate().equals(null) || realjam_kembali.getFormatedTime().toString().equals("00:00:00") || kondisi_kembali.getText().isEmpty() || kilometer_kembali.getText().isEmpty() || bbm_kembali.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Lengkapi data yang anda masukkan terlebih dahulu!");
-        } else {
+//        if (realtgl_kembali.getDate().equals(null) || realjam_kembali.getFormatedTime().toString().equals("00:00:00") || kondisi_kembali.getText().isEmpty() || kilometer_kembali.getText().isEmpty() || bbm_kembali.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Lengkapi data yang anda masukkan terlebih dahulu!");
+//        } else {
             try {
                 Koneksi objkoneksi = new Koneksi();
                 Connection con = objkoneksi.bukakoneksi();
                 Statement st = con.createStatement();
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                String sql = "update transaksi set tgl_kembali_real = '" + String.valueOf(format.format(realtgl_kembali.getDate())) + "',"
-                        + "jam_kembali_real = '" + realjam_kembali.getFormatedTime() + "',"
-                        + "kondisi_kembali = '" + kondisi_kembali.getText() + "',"
-                        + "kilometer_kembali = '" + kilometer_kembali.getText() + "',"
-                        + "bbm_kembali = '" + bbm_kembali.getText() + "',"
-                        + "total_biaya = '" + total_biaya.getText() + "',"
-                        + "denda_transaksi = '" + denda.getText() + "',"
-                        + "where NoTransaksi ='" + kode_trans.getSelectedItem() + "'";
+                String sql = "update transaksi set TglKembaliReal = '" + String.valueOf(format.format(realtgl_kembali.getDate())) + "',"
+                        + "JamKembaliReal = '" + realjam_kembali.getFormatedTime() + "',"
+                        + "KondisiMobilKembali = '" + kondisi_kembali.getText() + "',"
+                        + "KilometerKembali = '" + kilometer_kembali.getText() + "',"
+                        + "BBMKembali = '" + bbm_kembali.getText() + "',"
+                        + "TotalBiaya = '" + total_biaya.getText() + "',"
+                        + "Denda = '" + total_denda.getText() + "' "
+                        + "where NoTransaksi = '" + kode_trans.getSelectedItem() + "'";
                 int row = st.executeUpdate(sql);
                 if (row == 1) {
                     JOptionPane.showMessageDialog(null, "Data sudah diupdate", "informasi", JOptionPane.INFORMATION_MESSAGE);
@@ -223,7 +223,7 @@ public class pengembalian_form extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "data tidak diubah"
                         + e, "informasi", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
+//        }
     }
 
     void update() {
@@ -1250,7 +1250,7 @@ public class pengembalian_form extends javax.swing.JFrame {
             total_denda.setText(a);
 
         } catch (Exception a) {
-            JOptionPane.showMessageDialog(this, "Masukan Tanggal Peminjaman dan Tanggal Pengembalian");
+//            JOptionPane.showMessageDialog(this, "Masukan Tanggal Peminjaman dan Tanggal Pengembalian");
         }
         int totalbiaya = Integer.parseInt(total_denda.getText()) + Integer.parseInt(lbl_total.getText());
         String b = Integer.toString(totalbiaya);
