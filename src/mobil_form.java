@@ -39,8 +39,8 @@ public class mobil_form extends javax.swing.JFrame {
 
     private void clear() {
 
-        merk_mobil.setText("");
-        tipe_mobil.setSelectedItem("--Pilih Tipe--");
+        tipe_mobil.setText("");
+        merk_kendaraan.setSelectedItem("--Pilih Tipe--");
         tahun_mobil.setSelectedItem("--Pilih Tahun--");
         nopol_mobil.setText("");
         sewa_mobil.setText("");
@@ -49,14 +49,14 @@ public class mobil_form extends javax.swing.JFrame {
     }
 
     void tambah() {
-        if (merk_mobil.getText().isEmpty() || tipe_mobil.getSelectedItem().equals("--Pilih Tipe--") || tahun_mobil.getSelectedItem().equals("--Pilih Tahun--") || nopol_mobil.getText().isEmpty() || sewa_mobil.getText().isEmpty() || status_mobil.getSelectedItem().equals("--Pilih Status--")) {
+        if (tipe_mobil.getText().isEmpty() || merk_kendaraan.getSelectedItem().equals("--Pilih Tipe--") || tahun_mobil.getSelectedItem().equals("--Pilih Tahun--") || nopol_mobil.getText().isEmpty() || sewa_mobil.getText().isEmpty() || status_mobil.getSelectedItem().equals("--Pilih Status--")) {
             JOptionPane.showMessageDialog(this, "Data yang dimasukkan tidak lengkap!");
         } else {
             try {
                 Koneksi objkoneksi = new Koneksi();
                 Connection con = objkoneksi.bukakoneksi();
                 Statement st = con.createStatement();
-                String sql = "insert into data_mobil (nopol_mobil, merk_mobil, tipe_mobil, tahun_mobil, sewa_mobil,status_mobil)" + "values ('" + nopol_mobil.getText() + "','" + merk_mobil.getText() + "','" + tipe_mobil.getSelectedItem() + "','" + tahun_mobil.getSelectedItem() + "','" + sewa_mobil.getText() + "','" + status_mobil.getSelectedItem() + "')";
+                String sql = "insert into data_mobil (nopol_mobil, merk_mobil, tipe_mobil, tahun_mobil, sewa_mobil,status_mobil)" + "values ('" + nopol_mobil.getText() + "','" + merk_kendaraan.getSelectedItem() + "','" + tipe_mobil.getText() + "','" + tahun_mobil.getSelectedItem() + "','" + sewa_mobil.getText() + "','" + status_mobil.getSelectedItem() + "')";
                 int row = st.executeUpdate(sql);
                 if (row == 1) {
                     JOptionPane.showMessageDialog(null, "Data mobil sudah ditambahkan ke database", "informasi", JOptionPane.INFORMATION_MESSAGE);
@@ -76,8 +76,8 @@ public class mobil_form extends javax.swing.JFrame {
             Koneksi objkoneksi = new Koneksi();
             Connection con = objkoneksi.bukakoneksi();
             Statement st = con.createStatement();
-            String sql = "update data_mobil set merk_mobil = '" + merk_mobil.getText() + "',"
-                    + "tipe_mobil = '" + tipe_mobil.getSelectedItem() + "',"
+            String sql = "update data_mobil set merk_mobil = '" + tipe_mobil.getText() + "',"
+                    + "tipe_mobil = '" + merk_kendaraan.getSelectedItem() + "',"
                     + "tahun_mobil = '" + tahun_mobil.getSelectedItem() + "',"
                     + "sewa_mobil = '" + sewa_mobil.getText() + "',"
                     + "status_mobil = '" + status_mobil.getSelectedItem() + "'"
@@ -165,14 +165,14 @@ public class mobil_form extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        merk_mobil = new javax.swing.JTextField();
+        tipe_mobil = new javax.swing.JTextField();
         tahun_mobil = new javax.swing.JComboBox();
         nopol_mobil = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         status_mobil = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
-        tipe_mobil = new javax.swing.JComboBox();
+        merk_kendaraan = new javax.swing.JComboBox();
         sewa_mobil = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabel_mobil = new javax.swing.JTable();
@@ -292,9 +292,9 @@ public class mobil_form extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText(":");
 
-        merk_mobil.addActionListener(new java.awt.event.ActionListener() {
+        tipe_mobil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                merk_mobilActionPerformed(evt);
+                tipe_mobilActionPerformed(evt);
             }
         });
 
@@ -328,10 +328,10 @@ public class mobil_form extends javax.swing.JFrame {
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/car copy.png"))); // NOI18N
 
-        tipe_mobil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Pilih Tipe--", "Sedan", "Mini Bus", "Jip", "Pickup" }));
-        tipe_mobil.addActionListener(new java.awt.event.ActionListener() {
+        merk_kendaraan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Pilih Merk--", "Daihatsu", "Honda", "Kijang", "Toyota" }));
+        merk_kendaraan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipe_mobilActionPerformed(evt);
+                merk_kendaraanActionPerformed(evt);
             }
         });
 
@@ -366,13 +366,14 @@ public class mobil_form extends javax.swing.JFrame {
                             .addGap(4, 4, 4)))
                     .addComponent(jLabel2)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(panelGlass1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(status_mobil, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tipe_mobil, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(merk_mobil)
-                    .addComponent(nopol_mobil)
-                    .addComponent(tahun_mobil, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sewa_mobil, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+                .addGroup(panelGlass1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGlass1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(status_mobil, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(merk_kendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nopol_mobil)
+                        .addComponent(tahun_mobil, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sewa_mobil, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+                    .addComponent(tipe_mobil, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addGap(75, 75, 75))
@@ -388,14 +389,13 @@ public class mobil_form extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel10))
                             .addGroup(panelGlass1Layout.createSequentialGroup()
-                                .addComponent(merk_mobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(merk_kendaraan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelGlass1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelGlass1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel11)
-                                        .addComponent(jLabel5))
+                                .addGroup(panelGlass1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel5)
                                     .addComponent(tipe_mobil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(7, 7, 7)
                         .addGroup(panelGlass1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelGlass1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6)
@@ -475,8 +475,8 @@ public class mobil_form extends javax.swing.JFrame {
                 String sql = "select *from data_mobil where nopol_mobil='" + tabel_mobil.getValueAt(baris, 0).toString() + "'";
                 ResultSet rs = st.executeQuery(sql);
                 rs.last();
-                merk_mobil.setText(rs.getString("merk_mobil"));
-                tipe_mobil.setSelectedItem(rs.getString("tipe_mobil"));
+                tipe_mobil.setText(rs.getString("merk_mobil"));
+                merk_kendaraan.setSelectedItem(rs.getString("tipe_mobil"));
                 tahun_mobil.setSelectedItem(rs.getString("tahun_mobil"));
                 nopol_mobil.setText(rs.getString("nopol_mobil"));
                 sewa_mobil.setText(rs.getString("sewa_mobil"));
@@ -503,9 +503,9 @@ public class mobil_form extends javax.swing.JFrame {
         hapus();
     }//GEN-LAST:event_btn_Delete__addItemActionPerformed
 
-    private void merk_mobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merk_mobilActionPerformed
+    private void tipe_mobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipe_mobilActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_merk_mobilActionPerformed
+    }//GEN-LAST:event_tipe_mobilActionPerformed
 
     private void status_mobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_status_mobilActionPerformed
         // TODO add your handling code here:
@@ -521,9 +521,9 @@ public class mobil_form extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tahun_mobilActionPerformed
 
-    private void tipe_mobilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipe_mobilActionPerformed
+    private void merk_kendaraanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merk_kendaraanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tipe_mobilActionPerformed
+    }//GEN-LAST:event_merk_kendaraanActionPerformed
 
     public static void main(String args[]) {
         
@@ -557,7 +557,7 @@ public class mobil_form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField merk_mobil;
+    private javax.swing.JComboBox merk_kendaraan;
     private javax.swing.JTextField nopol_mobil;
     private usu.widget.glass.PanelGlass panelGlass1;
     private usu.widget.glass.PanelGlass panelGlass6;
@@ -565,7 +565,7 @@ public class mobil_form extends javax.swing.JFrame {
     private javax.swing.JComboBox status_mobil;
     private javax.swing.JTable tabel_mobil;
     private javax.swing.JComboBox tahun_mobil;
-    private javax.swing.JComboBox tipe_mobil;
+    private javax.swing.JTextField tipe_mobil;
     private javax.swing.JTextField txt_search_AddItem;
     // End of variables declaration//GEN-END:variables
 }

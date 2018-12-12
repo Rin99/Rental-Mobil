@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2018 at 06:34 AM
+-- Generation Time: Dec 12, 2018 at 09:10 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -40,8 +40,10 @@ CREATE TABLE IF NOT EXISTS `data_mobil` (
 --
 
 INSERT INTO `data_mobil` (`nopol_mobil`, `merk_mobil`, `tipe_mobil`, `tahun_mobil`, `sewa_mobil`, `status_mobil`) VALUES
+('123', 'Daihatsu', 'Ayla', 2014, 350000, 'Tersedia'),
 ('1234', 'Brio', 'Sedan', 2012, 500000, 'Tersedia'),
-('N 1250 BS', 'Civic', 'Sedan', 2015, 600000, 'Tersedia');
+('12345', 'Daihatsu', 'Agya', 2015, 400000, 'Tersedia'),
+('N 1250 BS', 'Civic', 'Sedan', 2015, 600000, 'Keluar');
 
 -- --------------------------------------------------------
 
@@ -82,7 +84,10 @@ INSERT INTO `data_pelanggan` (`ktp_pelanggan`, `nama_pelanggan`, `alamat_pelangg
 ('1', 'q', 'q	', '1', '1'),
 ('1', 'q', 'q', '1', '1'),
 ('1', 'q', 'q', '1', '1'),
-('12345123', 'kei', 'Jepun', '0987654', 'KT001');
+('12345123', 'kei', 'Jepun', '0987654', 'KT001'),
+('123', 'qwe', 'qwe', '123', 'qwe'),
+('12345', 'qwe1', 'qwe1', '123', 'qwe2'),
+('6725672573', 'Yudoyono', 'adoh kono numpak becak kopling', '0987654', '123');
 
 -- --------------------------------------------------------
 
@@ -104,7 +109,8 @@ CREATE TABLE IF NOT EXISTS `data_sopir` (
 --
 
 INSERT INTO `data_sopir` (`id_sopir`, `nama_sopir`, `alamat_sopir`, `telp_sopir`, `no_sim`, `tarif_sopir`) VALUES
-('123', 'Bambank', 'Malang', '62123', '123', 120000);
+('123', 'Bambank', 'Malang', '62123', '123', 120000),
+('666', 'Susilo', 'adoh kono numpak unto', '08666666666', '666666', -100000);
 
 -- --------------------------------------------------------
 
@@ -217,11 +223,18 @@ CREATE TABLE IF NOT EXISTS `transaksi` (
 
 INSERT INTO `transaksi` (`NoTransaksi`, `NoKTP`, `NoPlat`, `TglPesan`, `TglPinjam`, `JamPinjam`, `TglKembaliRencana`, `JamKembaliRencana`, `BiayaPinjam`, `TglKembaliReal`, `JamKembaliReal`, `Denda`, `KilometerPinjam`, `KilometerKembali`, `BBMPinjam`, `BBMKembali`, `KondisiMobilPinjam`, `KondisiMobilKembali`, `IDSopir`, `BiayaSopir`, `TotalBiaya`) VALUES
 ('1', '1', '1234', '2018-12-10', '2018-12-10', '00:00:00', '2018-12-12', '00:00:00', 2480000, '2018-12-13', '00:00:00', 1240000, 1, 1, 1, 1, 'oke', 'qwe', '123', 120000, 3720000),
+('123', '6725672573', 'N 1250 BS', '2018-12-12', '2018-12-09', '00:00:00', '2018-12-01', '00:00:00', -8000000, NULL, NULL, NULL, 100, NULL, 100, NULL, '', NULL, '666', -100000, NULL),
 ('KT001', '12345123', 'N 1250 BS', '2018-12-12', '2018-12-13', '07:30:00', '2018-12-16', '10:00:00', 4320000, '2018-12-16', '00:00:00', 0, 35, 12, 27, 12, 'baik', 'qwe', '123', 120000, 4320000);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `data_mobil`
+--
+ALTER TABLE `data_mobil`
+  ADD PRIMARY KEY (`nopol_mobil`);
 
 --
 -- Indexes for table `data_user`

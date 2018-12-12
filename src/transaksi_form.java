@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Stack;
 import javax.swing.JOptionPane;
 
 public class transaksi_form extends javax.swing.JFrame {
@@ -48,7 +49,7 @@ public class transaksi_form extends javax.swing.JFrame {
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost/rental_mobil", "root", "");
             st = con.createStatement();
-            String sql = "select merk_mobil from data_mobil";
+            String sql = "select distinct merk_mobil from data_mobil";
             rs = st.executeQuery(sql);
 
             while (rs.next()) {

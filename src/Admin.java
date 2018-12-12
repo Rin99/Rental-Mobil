@@ -20,6 +20,8 @@ public class Admin extends javax.swing.JFrame {
         buttonGlass3 = new usu.widget.ButtonGlass();
         buttonGlass4 = new usu.widget.ButtonGlass();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        omzet = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,8 +60,17 @@ public class Admin extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Bebas Neue", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel2.setText("Menu Admin");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 180, 30));
+
+        jLabel4.setFont(new java.awt.Font("Bebas Neue", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel4.setText("Menu Admin");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+
+        omzet.setFont(new java.awt.Font("Bebas Neue", 0, 24)); // NOI18N
+        omzet.setForeground(new java.awt.Color(254, 254, 254));
+        omzet.setText("Rp.");
+        getContentPane().add(omzet, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/backOk.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 280));
@@ -100,5 +111,7 @@ public class Admin extends javax.swing.JFrame {
     private usu.widget.ButtonGlass buttonGlass4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel omzet;
     // End of variables declaration//GEN-END:variables
 }

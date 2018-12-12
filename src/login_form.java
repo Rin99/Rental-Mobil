@@ -84,7 +84,7 @@ public class login_form extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 100, -1));
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 120, -1));
 
         close.setForeground(new java.awt.Color(255, 255, 255));
         close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/close_delete.png"))); // NOI18N
@@ -108,7 +108,12 @@ public class login_form extends javax.swing.JFrame {
 
     private void btn_settingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGlass2ActionPerformed
     }//GEN-LAST:event_buttonGlass2ActionPerformed
-
+    
+    void clear() {
+        user.setText("");
+        pass.setText("");
+    }
+    
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         try {
             String username = user.getText();
@@ -126,12 +131,15 @@ public class login_form extends javax.swing.JFrame {
             }
             if (baris == 1) {
                 if (tipe.equals("Admin") ){
-                JOptionPane.showMessageDialog(close, "Login Berhasil!, Selamat Datang " + username);
+               // JOptionPane.showMessageDialog(close, "Login Berhasil!, Selamat Datang " + username);
                 new Admin().show();
+                super.dispose();
                 }
                 else if(tipe.equals("Karyawan")){
                 new Home().show();
-                JOptionPane.showMessageDialog(close, "Login Berhasil! Selamat Datang " + username);}               
+                super.dispose();
+                //JOptionPane.showMessageDialog(close, "Login Berhasil! Selamat Datang " + username);
+                }               
             } else {
                 JOptionPane.showMessageDialog(null, "Username atau Password anda Salah");
             }
@@ -140,7 +148,7 @@ public class login_form extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(login_form.class.getName()).log(Level.SEVERE, null, ex);
         }
-        super.dispose();       
+      //  super.dispose();       
     }//GEN-LAST:event_loginActionPerformed
 
     private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
